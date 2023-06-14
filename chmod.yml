@@ -1,0 +1,11 @@
+---
+- name: Change permission on regularbackup.sh file
+  hosts: controllers
+  tasks:
+    - name: Set permission on regularbackup.sh
+      ansible.builtin.file:
+        path: /opt/scripts/regularbackup.sh
+        state: file
+        owner: root
+        group: root
+        mode: "0755"
