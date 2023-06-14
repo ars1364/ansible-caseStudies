@@ -1,0 +1,23 @@
+---
+- name: mount module demo
+  hosts: controllers
+  become: true
+  vars:
+    mynfs: "172.20.128.1:/Backup"
+    mountpoint: "/Backup"
+    permission: '0777'
+  tasks:
+    - name: check mountpoint exists
+      ansible.builtin.file:
+        path: "{{ mountpoint }}"
+        state: directory
+        mode: "{{ permission }}"
+        owner: root
+        group: root
+
+    - name: mount network share
+      ansible.builtin.mount:
+        src: "{{ mynfs }}"
+        path: "{{ mountpoint }}"
+        fstype: nfs
+        state: mounted
