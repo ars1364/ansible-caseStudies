@@ -1,0 +1,16 @@
+- name: Ansible Copy Example Local to Remote
+  hosts: controllers
+  tasks:
+    - name: create folder
+      file:
+        path: /opt/scripts/
+        state: directory
+
+    - name: copying file with playbook
+      become: true
+      copy:
+        src: /opt/scripts/regularbackup.sh
+        dest: /opt/scripts/regularbackup.sh
+        owner: root
+        group: root
+        mode: 0644
