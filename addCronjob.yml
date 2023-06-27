@@ -1,14 +1,14 @@
 ---
-- name: cron module demo
+- name: cron module
   hosts: controllers
   tasks:
-   - name: regular dd backup
+   - name: docker save
      ansible.builtin.cron:
-      name: "dd backup"
+      name: "docker save"
       state: present
       minute: "0"
       hour: "22"
       day: "*"
       month: "*"
       weekday: "1"
-      job: "/opt/scripts/regularbackup.sh"
+      job: "0 20 * * 2 /opt/scripts/dockersave.sh >>/opt/scripts/dockersaveoutput.log 2>&1"
